@@ -39,8 +39,9 @@ class RetrievalAgent:
         top = response.points[0]
 
         # 5. Similarity decision
+        # Include the point ID in the payload
         if top.score >= SIMILARITY_THRESHOLD:
-            return True, top.payload, top.score
+            return True, {"id": top.id, **top.payload}, top.score
 
         return False, None, top.score
 

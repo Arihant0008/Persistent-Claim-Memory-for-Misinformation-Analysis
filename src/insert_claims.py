@@ -17,11 +17,13 @@ vectors = model.encode(claims)
 points = []
 now = datetime.utcnow().isoformat()
 
+point_id = str(uuid.uuid4())
 for claim, vector in zip(claims, vectors):
     points.append({
-        "id": str(uuid.uuid4()),
+        "id": point_id,
         "vector": vector.tolist(),
         "payload": {
+            "point_id": point_id,
             "normalized_claim": claim,
             "verdict": None,
             "seen_count": 1,
